@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "bwise-bo"
+    }
+  },
+  "defaultProject": "bwise-bo",
+  "cli": {
+    "analytics": "44f46ad1-04ef-4955-bd93-f468e107b4e0"
+  }
 }
