@@ -1,0 +1,117 @@
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-5"></div>
+            <div class="col-md-5">
+                <strong>Liste des Produits</strong>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-primary" (click)="initProduct()" data-toggle="modal" data-target="#addModal" aria-label="Update">
+                    <i class="fa fa-plus-square-o fa-lg"></i>
+                    <span> Ajouter</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <table class="card-body table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Libelle</th>
+                <th>Prix Unitaire</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let prod of products; index as id">
+                <th scope="row">{{id +1}}</th>
+                <td>{{ prod.prdLabel }}</td>
+                <td>{{ prod.prdUP }}</td>
+                <td>{{ prod.prdDescription }}</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a class="btn btn-primary" [routerLink]="['/layout/products', prod.prdId]" aria-label="Details">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        </a>
+                        <a class="btn btn-secondary" (click)="updateForm(prod)" data-toggle="modal" data-target="#addModal" aria-label="Update">
+                            <i class="fa fa-pencil-square-o fa-lg"></i>
+                        </a>
+                        <a class="btn btn-danger" (click)="delete(prod)" data-toggle="modal" data-target="#confirmDelete" aria-label="Delete">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <!-- update modal modal-dialog-centered-->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModalLabel">
+                        <span *ngIf="!isUpdate">Nouveau Produit</span>
+                        <span *ngIf="isUpdate">Mise à Jour</span>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form role="form" [formGroup]="createForm" (ngSubmit)="onAdd()">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Libelle" formControlName="label" />
+                            <br/>
+                            <input type="text" class="form-control" placeholder="Description" formControlName="description" />
+                            <br/>
+                            <input type="text" class="form-control" placeholder="Prix Unitaire" formControlName="unitPrice" />
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" formControlName="category">
+                                <option *ngFor="let cat of categories; index as i" [value]="cat.catId">
+                                    {{cat.catLabel}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <br/>
+                            <input type="file" accept=".jpeg, .jpg, .jpe, .png" class="form-control" placeholder="image" formControlName="imagePath"
+                                required />
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-8"></div>
+                            <div class="col-mb-1">
+                                <button id="closeModal" type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                            <div class="col-md-1">
+                                <button type="submit" class="btn btn-success">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="deleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Confirmer l'Operation
+                </div>
+                <div class="modal-body">
+                    Voulez-vous supprimer ce produit ?
+                </div>
+                <div class="modal-footer">
+                    <button id="closeDeleteModal" type="button" class="btn btn-default" data-dismiss="modal">Non</button>
+                    <a class="btn btn-danger btn-ok" (click)="confirmDelete()">Oui</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

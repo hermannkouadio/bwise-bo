@@ -1,0 +1,98 @@
+<div class="container">
+    <div class="row" *ngIf="order != null">
+        <div class="col-md-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-6">
+                            <strong>Details Commande</strong>
+                        </div>
+                        <div class="col-md-2">
+                            <!-- 0: draft, 1: wait validation, 2: in progress, 3: delivered, 4: cancel -->
+                            <div>
+                                <div *ngIf="order.ordStatus == 0 || order.ordStatus == 3 || order.ordStatus == 4">
+                                    <span class="title">Etat Actuel</span>
+                                    <span *ngIf="order.ordStatus == 4" class="badge badge-danger">
+                                        Annulle</span>
+                                    <span *ngIf="order.ordStatus == 3" class="badge badge-success">
+                                        Livre</span>
+                                    <span *ngIf="order.ordStatus == 0" class="badge badge-secondary">
+                                        Brouillon</span>
+                                </div>
+
+                                <div *ngIf="order.ordStatus == 1 || order.ordStatus == 2">
+                                    <span class="title">Etape Suivante</span>
+                                    <a [routerLink]="['/layout/orders', order.ordId]" (click)="updateState(order)">
+                                        <span *ngIf="order.ordStatus == 1" class="badge badge-primary">
+                                            Accepter</span>
+                                        <span *ngIf="order.ordStatus == 2" class="badge badge-success">
+                                            Livrer</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <i class="fa fa-hashtag" aria-hidden="true"></i>
+                            <span class="title"> Num. Commande</span>
+                            <br/>
+                            <p>{{ order.ordId }}</p>
+                            <hr/>
+                        </div>
+                        <div class="col-md-3">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <span class="title"> Nom</span>
+                            <br/>
+                            <p>{{ order.owner.fullname }}</p>
+                            <hr/>
+                        </div>
+                        <div class="col-md-3">
+                            <i class="fa fa-phone" aria-hidden="true"></i>
+                            <span class="title"> Contact</span>
+                            <br/>
+                            <p>{{ order.owner.mobile }}</p>
+                            <hr/>
+                        </div>
+                        <div class="col-md-3">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                            <span class="title"> Lieu de Livraison</span>
+                            <br/>
+                            <p>{{ order.owner.location }}</p>
+                            <hr/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-md-12 card card-primary text-center">
+            <table class="card-body table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Libellé</th>
+                        <th>Prix Unitaire</th>
+                        <th>Qunantité</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of items; index as id">
+                        <th scope="row">{{id+1}}</th>
+                        <td>{{ item.product.prdLabel }}</td>
+                        <td>{{ item.product.prdUP }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.quantity * item.product.prdUP}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,14 @@
+.title{
+    color: blueviolet;
+}
+
+.btn-group-xs > .btn, .btn-xs {
+    padding: .10rem .4rem;
+    font-size: .950rem;
+    line-height: 1.2;
+    border-radius: .2rem;
+}
+
+a > span {
+    cursor: pointer;
+}

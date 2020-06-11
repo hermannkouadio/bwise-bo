@@ -1,0 +1,37 @@
+<div *ngIf="product" class="container" [formGroup]="productDetailForm">
+
+    <div class="row">
+        <div class="class col-md-3">
+            <span>Libelle</span>
+            <p>
+                {{productDetailForm.value.label}}
+            </p>
+        </div>
+        <div class="class col-md-3">
+            <span>Description</span>
+            <p>
+                {{productDetailForm.value.description}}
+            </p>
+        </div>
+        <div class="class col-md-3">
+            <span>Prix Unitaire</span>
+            <p>
+                {{productDetailForm.value.unitPrice}}
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="class col-md-3">
+            <span>Categorie</span>
+            <p>
+                {{categoryLabel}}
+            </p>
+        </div>
+        <div class="class col-md-3">
+            <span>Image</span>
+            <div>
+                <img class="img-thumbnail" size="" [src]="productDetailForm.value.imageUrl" [alt]="productDetailForm.value.imageUrl">
+            </div>
+        </div>
+    </div>
+</div>

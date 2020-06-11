@@ -1,0 +1,34 @@
+<div [@routerTransition] class="login-page">
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <img class="user-avatar" src="assets/images/logo.png" width="150px" />
+            <h1>Bwise</h1>
+            <form role="form" (ngSubmit)="onLoggedin()">
+                <div class="form-content">
+                    <div class="form-group">
+                        <input type="text"
+                            name="username"
+                            [placeholder]="'Email' | translate"
+                            class="form-control input-underline input-lg"
+                            [(ngModel)] ="jwtRequest.username"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password"
+                            name="password"
+                            [placeholder]="'Password' | translate"
+                            class="form-control input-underline input-lg"
+                            [(ngModel)] ="jwtRequest.password"
+                        />
+                    </div>
+                </div>
+                <button type="submit" class="btn rounded-btn">{{
+                    'Log in' | translate
+                }}</button>
+                &nbsp;
+                <button [routerLink]="['/signup']" class="btn rounded-btn">{{ 'Register' | translate }}</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-5"></div>
+            <div class="col-md-5">
+                <strong>Orders List</strong>
+            </div>
+        </div>
+    </div>
+    <table class="card-body table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Propriétaire</th>
+                <th>Etat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let ord of orders; index as id">
+                <th scope="row">{{id}}</th>
+                <td>{{ ord.owner.fullname }}</td>
+                <td>
+                    <span class="badge badge-secondary" *ngIf="ord.ordStatus == 0">Brouillon</span>
+                    <span class="badge badge-warning" *ngIf="ord.ordStatus == 1">En atttente</span>
+                    <span class="badge badge-primary" *ngIf="ord.ordStatus == 2">Livraison en cours</span>
+                    <span class="badge badge-success" *ngIf="ord.ordStatus == 3">Terminee</span>
+                    <span class="badge badge-danger" *ngIf="ord.ordStatus == 4">Annulee</span>
+                </td>
+                <td>
+                    <div class="btn-group btn-xs" role="group" aria-badge="Basic example">
+                        <a class="btn btn-xs btn-primary" [routerLink]="['/layout/orders', ord.ordId]">
+                            <i class="fa  fa-cog"> Gerer</i>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
